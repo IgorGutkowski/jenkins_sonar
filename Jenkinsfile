@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven 3.6.3'
-    }
-
     stages {
         stage('Checkout') {
             steps {
@@ -41,6 +37,7 @@ pipeline {
             }
             post {
                 always {
+                    // Użyj wtyczki Jenkins Cobertura do publikacji wyników
                     cobertura coberturaReportFile: '**/coverage.xml'
                 }
             }
@@ -66,7 +63,7 @@ pipeline {
     post {
         always {
             echo 'Cleaning up'
-            deleteDir() 
+            deleteDir() // Usuwa katalog roboczy
         }
         success {
             echo 'Pipeline succeeded!'
