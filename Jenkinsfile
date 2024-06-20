@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { docker { image 'jenkins-cmake-agent' } }
 
     stages {
         stage('Checkout') {
